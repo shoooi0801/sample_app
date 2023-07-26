@@ -6,11 +6,14 @@ class ListsController < ApplicationController
   def create
     @list = List.new(list_params)
     if @list.save
+      flash[:notice] = "投稿に成功しました。"
       redirect_to list_path(@list.id)
     else
+      flash.now[:alert] = "投稿に失敗しました。" #キーをalertに変更
       render :new
     end
   end
+
   def index
     @lists = List.all
   end
